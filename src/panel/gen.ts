@@ -262,17 +262,44 @@ export class Gen {
   private isClientField(str: string) {
     return str.indexOf("c") !== -1;
   }
+  private formatTips = "第1行为Key，第2行为注释，第3行为导出类似c/s/cs，第4行为数据类型，后续为导出的数据";
+  private checkTarget(itemSheet: ItemData, target: Array<string | undefined>) {
+    for (let i = 0; i < target.length; i++) {
+      const key = target[i];
+      if (key === undefined) {
+        throw new Error(`${itemSheet.name}/${itemSheet.sheet}数据异常：第3行${i + 1}列数据为空`);
+      }
+      if (key.indexOf("s") === -1 && key.indexOf("c") === -1) {
+        throw new Error(`${itemSheet.name}/${itemSheet.sheet}数据异常：第3行${i + 1}列数据错误，请填写c/s/cs，用来标识该字段是客户端还是服务端。 ${this.formatTips}`);
+      }
+    }
+  }
+  /**
+   * 第一行是key
+   */
+  private checkTitle(itemSheet: ItemData, title: Array<string>) {
+    for (let i = 0; i < title.length; i++) {
+      const item = title[i];
+      if (item && /[\u4e00-\u9fa5]/.test(item)) {
+        throw new Error(`${itemSheet.name}/${itemSheet.sheet}数据异常：第1行${i + 1}列数据为中文，该行为数据的key字段，请使用英文。${this.formatTips}`);
+      }
+    }
+  }
   private splitData(itemSheet: ItemData): { server: any; client: any } {
     const excelData: any[][] = itemSheet.buffer;
     const title = excelData[0];
+    this.checkTitle(itemSheet, title);
     const desc = excelData[1];
     /**
      * 是客户端还是服务器
      */
     const target = excelData[2];
+    this.checkTarget(itemSheet, target);
     const ruleText = excelData[3];
     const ret = { server: {}, client: {} };
-
+    if (excelData.length >= 4) {
+      const lineData = excelData[4];
+    }
     for (let line = 4; line < excelData.length; line++) {
       const lineData = excelData[line];
       const id = lineData[0];
@@ -287,7 +314,7 @@ export class Gen {
       const saveLineData = { server: {}, client: {} };
       for (let idx = 0; idx < title.length; idx++) {
         const key = title[idx];
-        const rule = ruleText[idx].trim();
+        const rule = ruleText[idx].toString().trim();
         if (key === "Empty" || rule === "Empty") {
           continue;
         }

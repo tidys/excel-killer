@@ -1,0 +1,11 @@
+{
+  "files.autoSave": "onFocusChange",
+  "editor.indentSize": "tabSize",
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "[typescript]": {
+    "editor.formatOnSave": true,
+    "prettier.printWidth": 80000,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}

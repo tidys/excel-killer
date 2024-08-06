@@ -75,6 +75,7 @@ export default defineComponent({
           await gen.doWork(data);
           ccui.footbar.showTips("generate success");
         } catch (e: any) {
+          console.error(e);
           ccui.footbar.showError(e.message);
         }
       })();

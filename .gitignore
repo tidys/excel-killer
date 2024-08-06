@@ -5,3 +5,4 @@ web/
 dist/
 yarn-error.log
 .yalc/
+.DS_Store
