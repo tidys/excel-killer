@@ -280,6 +280,9 @@ export class Gen {
   private checkTitle(itemSheet: ItemData, title: Array<string>) {
     for (let i = 0; i < title.length; i++) {
       const item = title[i];
+      if (item === undefined) {
+        throw new Error(`${itemSheet.name}/${itemSheet.sheet}数据异常：第1行${i + 1}列数据为空`);
+      }
       if (item && /[\u4e00-\u9fa5]/.test(item)) {
         throw new Error(`${itemSheet.name}/${itemSheet.sheet}数据异常：第1行${i + 1}列数据为中文，该行为数据的key字段，请使用英文。${this.formatTips}`);
       }
@@ -319,7 +322,10 @@ export class Gen {
           continue;
         }
 
-        let value = lineData[idx] || "";
+        let value = lineData[idx];
+        if (value === undefined) {
+          value = "";
+        }
         if (value) {
           // value = this.cutString(rule, value);
         }
