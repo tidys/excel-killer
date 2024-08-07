@@ -102,15 +102,7 @@ export default defineComponent({
       if (!dir || !existsSync(dir)) {
         return;
       }
-      let files = await CCP.Adaptation.Util.globArray([`${dir}/**/*.xlsx`, `${dir}/**/*.xls`]);
-      files = files.filter((item) => {
-        if (item.startsWith("~$")) {
-          console.log("检索到excel产生的临时文件:" + item);
-          return false;
-        } else {
-          return true;
-        }
-      });
+      const files = await CCP.Adaptation.Util.globArray([`${dir}/**/*.xlsx`, `${dir}/**/*.xls`]);
       const data: Record<string, ArrayBuffer> = {};
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
@@ -118,7 +110,20 @@ export default defineComponent({
       }
       parseExcelData(data);
     }
+    function isTemplateFile(path: string): boolean {
+      let head = [".~", "~$"];
+      const name = basename(path);
+      if (head.find((item) => name.startsWith(item))) {
+        return true;
+      }
+      return false;
+    }
     function parseExcelData(data: Record<string, ArrayBuffer>) {
+      for (const key in data) {
+        if (isTemplateFile(key)) {
+          delete data[key];
+        }
+      }
       excelFileArr.value = Object.keys(data);
       excelArray.value.length = 0;
       const excelSheetArray = [];
@@ -201,6 +206,7 @@ export default defineComponent({
           }
           appStore().save();
         } catch (e) {
+          console.error(e);
           ccui.footbar.showError(e.message);
         }
       },
