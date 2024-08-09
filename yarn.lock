@@ -1988,10 +1988,10 @@ case-sensitive-paths-webpack-plugin@^2.3.0:
   resolved "https://registry.yarnpkg.com/case-sensitive-paths-webpack-plugin/-/case-sensitive-paths-webpack-plugin-2.4.0.tgz#db64066c6422eed2e08cc14b986ca43796dbc6d4"
   integrity sha512-roIFONhcxog0JSSWbvVAh3OocukmSgpqOH6YpMkCvav/ySIV3JKg4Dc8vYtQjYi/UxpNE36r/9v+VqTQqgkYmw==
 
-cc-plugin@^2.1.54:
-  version "2.1.54"
-  resolved "https://registry.yarnpkg.com/cc-plugin/-/cc-plugin-2.1.54.tgz#cf387cef6e5d527a1b82bf61ab0409aa8c8bcbc2"
-  integrity sha512-zW8qJi//LfKnXRoHq8jHyadIF2VZ/b+aeioEm1xmtVZ4lamwP+1FjPOS9NYaACLY2EosAbcUYhy08ofnzPa50Q==
+cc-plugin@^2.1.55:
+  version "2.1.55"
+  resolved "https://registry.yarnpkg.com/cc-plugin/-/cc-plugin-2.1.55.tgz#b78206074fe89cd967a7d5d96f51c6f196571ed2"
+  integrity sha512-5JIHbbw14KvJm11+glnGa7v97w1U02Zkeq9p2NHJ6PHlO3hz2pE+8cgZnjxTL+XfwdE0aZ0AJqVVBTRh1tiA+A==
   dependencies:
     "@babel/generator" "^7.16.8"
     "@popperjs/core" "^2.11.6"
