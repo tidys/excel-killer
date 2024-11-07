@@ -66,7 +66,9 @@ export default defineComponent({
     const { config } = storeToRefs(appStore());
     async function onGen() {
       (async () => {
-        const data = toRaw(excelArray.value).filter((item) => item.isUse);
+        const rawData = toRaw(excelArray.value);
+        console.log(rawData);
+        const data = rawData.filter((item) => item.isUse);
         const gen = new Gen();
         try {
           const cfg = toRaw(appStore().config);
