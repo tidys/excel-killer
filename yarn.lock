@@ -1185,10 +1185,10 @@
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
-"@xuyanfeng/cc-ui@^0.2.31":
-  version "0.2.31"
-  resolved "https://registry.yarnpkg.com/@xuyanfeng/cc-ui/-/cc-ui-0.2.31.tgz#d42e5160af82dcaeae16a3cd136e85de4f09c0ad"
-  integrity sha512-Rz2ZUOgPvup8RQwcSQITvw+bqqw2XRPArwo3OfEAd7pE7WBuYygEylzf3SQZJ0p4AEgO+sYj8fmowPIB2VhzTQ==
+"@xuyanfeng/cc-ui@^0.2.33":
+  version "0.2.33"
+  resolved "https://mirrors.cloud.tencent.com/npm/@xuyanfeng/cc-ui/-/cc-ui-0.2.33.tgz#749b0f914a8ab1c49cf5774531977211e3393476"
+  integrity sha512-w3jpTiD8rj90JfOQpu47FBzcaplgoaGmTmSvGmjKaHAIheqSVfKLF1dlnSgQAYCqpBqzwm8HCLZpWXq3NsEe6Q==
   dependencies:
     axios "^1.7.2"
     chalk "^5.3.0"
@@ -1988,10 +1988,10 @@ case-sensitive-paths-webpack-plugin@^2.3.0:
   resolved "https://registry.yarnpkg.com/case-sensitive-paths-webpack-plugin/-/case-sensitive-paths-webpack-plugin-2.4.0.tgz#db64066c6422eed2e08cc14b986ca43796dbc6d4"
   integrity sha512-roIFONhcxog0JSSWbvVAh3OocukmSgpqOH6YpMkCvav/ySIV3JKg4Dc8vYtQjYi/UxpNE36r/9v+VqTQqgkYmw==
 
-cc-plugin@^2.1.55:
-  version "2.1.55"
-  resolved "https://registry.yarnpkg.com/cc-plugin/-/cc-plugin-2.1.55.tgz#b78206074fe89cd967a7d5d96f51c6f196571ed2"
-  integrity sha512-5JIHbbw14KvJm11+glnGa7v97w1U02Zkeq9p2NHJ6PHlO3hz2pE+8cgZnjxTL+XfwdE0aZ0AJqVVBTRh1tiA+A==
+cc-plugin@^2.1.57:
+  version "2.1.57"
+  resolved "https://mirrors.cloud.tencent.com/npm/cc-plugin/-/cc-plugin-2.1.57.tgz#8f25dc0ccc859567f26c2d2251ddfa9c8b5356e6"
+  integrity sha512-sMAQ8gFsML7QXc0iNZKFYePH0576SVa4Oet6JQcQYxdguA9UvKtx/7V5+LhepTOs7wHfQGomAsotaLjcjIMkwA==
   dependencies:
     "@babel/generator" "^7.16.8"
     "@popperjs/core" "^2.11.6"
