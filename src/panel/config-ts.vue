@@ -1,17 +1,17 @@
 <template>
   <CCSection name="配置-TypeScript" :expand="config.expand_ts" @change="onChangExpand">
     <CCProp name="导出" align="left">
-      <CCCheckBox v-model:value="config.exportTs" @change=""> </CCCheckBox>
+      <CCCheckBox v-model:value="config.exportTs" @change="onSave"> </CCCheckBox>
     </CCProp>
     <CCProp name="TypeScript存放路径:" v-if="!isWeb">
-      <CCInput v-model:value="config.ts_save_path" @click="onBtnClickOpenTsSavePath" :directory="true" disabled></CCInput>
+      <CCInput v-model:value="config.ts_save_path" @click="onBtnClickOpenTsSavePath" :directory="true" disabled @change="onSave"></CCInput>
       <CCButton @confirm="onChooseTsSavePath"><i class="iconfont icon_folder"></i></CCButton>
     </CCProp>
     <CCProp name="合并所有TypeScript" align="left" tooltip="[√]勾选,所有的配置将合并为一个ts文件<br>[×]未勾选,每个sheet对应一个ts文件">
-      <CCCheckBox v-model:value="config.ts_merge"></CCCheckBox>
+      <CCCheckBox v-model:value="config.ts_merge" @change="onSave"></CCCheckBox>
     </CCProp>
     <CCProp name="TypeScript文件名" v-show="config.ts_merge">
-      <CCInput v-model:value="config.ts_file_name" placeholder="请输入javaScript文件名"></CCInput>
+      <CCInput v-model:value="config.ts_file_name" placeholder="请输入javaScript文件名" @change="onSave"></CCInput>
       <CCButton @confirm="onBtnClickOpenJsFile" v-show="config.ts_merge">
         <i class="iconfont icon_folder"></i>
       </CCButton>
@@ -62,6 +62,9 @@ export default defineComponent({
           return;
         }
         appStore().config.ts_save_path = dirs[0];
+        appStore().save();
+      },
+      onSave() {
         appStore().save();
       },
     };

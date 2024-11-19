@@ -1,10 +1,10 @@
 <template>
   <CCSection name="配置-导出" :expand="config.expand_export" @change="onChangeExpand">
     <CCProp name="客户端*[c字段]" align="left">
-      <CCCheckBox v-model:value="config.exportClient" @change=""> </CCCheckBox>
+      <CCCheckBox v-model:value="config.exportClient" @change="onSave"> </CCCheckBox>
     </CCProp>
     <CCProp name="服务端*[s字段]" align="left">
-      <CCCheckBox v-model:value="config.exportServer" @change=""> </CCCheckBox>
+      <CCCheckBox v-model:value="config.exportServer" @change="onSave"> </CCCheckBox>
     </CCProp>
   </CCSection>
 </template>
@@ -25,6 +25,9 @@ export default defineComponent({
       config,
       onChangeExpand(expand: boolean) {
         appStore().config.expand_export = !!expand;
+        appStore().save();
+      },
+      onSave() {
         appStore().save();
       },
     };

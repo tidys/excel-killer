@@ -1,23 +1,23 @@
 <template>
   <CCSection name="配置-JavaScript" :expand="config.expand_js" @change="onChangExpand">
     <CCProp name="导出" align="left">
-      <CCCheckBox v-model:value="config.exportJs" @change=""> </CCCheckBox>
+      <CCCheckBox v-model:value="config.exportJs" @change="onSave"> </CCCheckBox>
     </CCProp>
     <CCProp name="Js存放路径:" v-if="!isWeb">
       <CCInput v-model:value="config.js_save_path" @click="onBtnClickOpenJsSavePath" :directory="true" disabled></CCInput>
       <CCButton @confirm="onChooseJsSavePath"><i class="iconfont icon_folder"></i></CCButton>
     </CCProp>
     <CCProp name="合并所有Js" align="left" tooltip="[√]勾选,所有的配置将合并为一个js文件<br>[×]未勾选,每个sheet对应一个js文件">
-      <CCCheckBox v-model:value="config.js_merge"></CCCheckBox>
+      <CCCheckBox v-model:value="config.js_merge" @change="onSave"></CCCheckBox>
     </CCProp>
     <CCProp name="javaScript文件名" v-show="config.js_merge">
-      <CCInput v-model:value="config.js_file_name" placeholder="请输入javaScript文件名"></CCInput>
+      <CCInput v-model:value="config.js_file_name" placeholder="请输入javaScript文件名" @change="onSave"></CCInput>
       <CCButton @confirm="onBtnClickOpenJsFile" v-show="config.js_merge">
         <i class="iconfont icon_folder"></i>
       </CCButton>
     </CCProp>
     <CCProp name="代码格式化" align="left" tooltip="[√]勾选,js将格式化后保存文件<br>[×]未勾选,js将保存为单行文件">
-      <CCCheckBox v-model:value="config.js_format"></CCCheckBox>
+      <CCCheckBox v-model:value="config.js_format" @change="onSave"></CCCheckBox>
     </CCProp>
   </CCSection>
 </template>
@@ -74,6 +74,9 @@ export default defineComponent({
           return;
         }
         appStore().config.js_save_path = dirs[0];
+        appStore().save();
+      },
+      onSave() {
         appStore().save();
       },
     };
