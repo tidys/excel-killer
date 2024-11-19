@@ -327,7 +327,7 @@ export class Gen {
           value = "";
         }
         if (value) {
-          // value = this.cutString(rule, value);
+          value = this.cutString(rule, value);
         }
         if (this.isClientField(target[idx])) {
           saveLineData.client[key] = value;

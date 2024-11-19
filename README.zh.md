@@ -32,14 +32,13 @@ Excel支持的格式: `*.xlsx`, `*.xls`
 - 第3行: 字段的导出目标，一个表格，前端后端公用
   - 包含有 c 字符的代表导出到client目标
   - 包含有 s字符代表导出到Server目标
-- 第4行：导出类型，暂未实现
-<!-- - 第4行：(by @我是一只傻狍子) 字段的导出规则，支持的类型 (注意:一定是英文的引号,不是中文的! 详见 Test.xlsx 测试用例)
+- 第4行(by @我是一只傻狍子)：导出类型，字段的导出规则，支持的类型 (注意:一定是英文的引号,不是中文的! 详见 Test.xlsx 测试用例)
   - Number
   - String
   - Array[Number|String]
   - Array[Array[Array|String]]
   - Array[Object{"key1":Number|String|Array[Number|String], ..."keyN"}]
-  - Object{"key1":Number|String|Array[Number|String], ..."keyN"}  -->
+  - Object{"key1":Number|String|Array[Number|String], ..."keyN"} 
 
 ## EXCEL数据注意事项
 - 尽量不要出现空Sheet，当然插件会自动跳过该Sheet
