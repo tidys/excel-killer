@@ -1,1 +1,0 @@
-(()=>{const e=window.pluginPanels||[],t=document.getElementById("app")||document.body;if(e.length>0)for(let n=0;n<e.length;n++){const l=e[n],o=document.createElement("a");o.text=l.label||"label",o.href=l.href||"href",t.append(o)}})();
