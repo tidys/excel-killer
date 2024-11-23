@@ -103,7 +103,8 @@ export class ConfigData {
   expand_json: boolean = true;
   expand_js: boolean = true;
   expand_desc: boolean = true;
-  expand_test: boolean = true;
+  expand_test_rule: boolean = true;
+  expand_test_excel: boolean = true;
   expand_ts: boolean = true;
   expand_lua: boolean = true;
   expand_export: boolean = true;

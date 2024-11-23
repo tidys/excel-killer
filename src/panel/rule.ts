@@ -31,22 +31,22 @@ enum Type {
   Object = "Object",
 }
 export const testCases: RuleCase[] = [];
-testCases.push(new RuleCase("Array[String]", "1|2|3", "数组的元素类型相同，元素个数不确定"));
-testCases.push(new RuleCase("Array[Number]", "1|2|3"));
-testCases.push(new RuleCase("Array[Array[Number]]", "10;20|100;200", `数组二级嵌套，数组分割按照|;,的顺序`));
-testCases.push(new RuleCase("Array[Array[Array[Number]]]", "10,11;20,21|100,101;200,201", "数组三级嵌套"));
+testCases.push(new RuleCase("Array[String]", "1|2|3", "字符串数组，元素类型相同，个数不确定"));
+testCases.push(new RuleCase("Array[Number]", "1|2|3", "数字数组，以|分割数据"));
+testCases.push(new RuleCase("Array[Array[Number]]", "10;20|100;200", `数组二级嵌套，分割符按照|;,的顺序依次进行分割`));
+testCases.push(new RuleCase("Array[Array[Array[Number]]]", "10,11;20,21|100,101;200,201", "数组三级嵌套，目前支持的最深层级"));
 testCases.push(new RuleCase("List[Number, String]", `1|苹果|abc`, "列表的元素类型允许不同，但是个数是确定的，多余的数据(abc)会被舍弃掉"));
-testCases.push(new RuleCase("List[Number, String, Array[Number]]", `1|苹果|2;3`, " "));
-testCases.push(new RuleCase("Array[List[Number, String]]", `1;a|2;b`, "列表的元素类型允许不同，但是个数是确定的"));
-testCases.push(new RuleCase("Array[List[Number, String, Array[Number]]]", `1;a;10,11|2;b;20,21`, "列表的元素类型允许不同，但是个数是确定的"));
-testCases.push(new RuleCase(`Array[Object{"fruit":String, "num": Number}]`, "苹果,1|香蕉,2"));
-testCases.push(new RuleCase(`Array[Object{"fruit":String, "num": Number}]`, "苹果|香蕉", "缺失的num默认值为0"));
-testCases.push(new RuleCase(`Array[Object{"fruit":String}]`, "苹果|香蕉"));
+testCases.push(new RuleCase("List[Number, String, Array[Number]]", `1|苹果|2;3`, "列表嵌套数组，注意分隔符的使用，分割符按照|;,的顺序依次进行分割"));
+testCases.push(new RuleCase("Array[List[Number, String]]", `1;a|2;b`, "数组嵌套列表，注意分隔符的使用，分割符按照|;,的顺序依次进行分割"));
+testCases.push(new RuleCase("Array[List[Number, String, Array[Number]]]", `1;a;10,11|2;b;20,21`, "数组列表嵌套，注意分隔符的使用，分割符按照|;,的顺序依次进行分割"));
 testCases.push(new RuleCase(`Object{"fruit":String, "num": Number}`, `苹果,1`, "对象是以 , 分割出key对应的值"));
 testCases.push(new RuleCase(`Object{"fruit":String, "num": Number, "price":Number}`, `苹果,1,100`));
 testCases.push(new RuleCase(`Object{"names":Array[String]}`, "a|b|c", "Object嵌套Array"));
 testCases.push(new RuleCase(`Object{"id":Number,"names":Array[String]}`, "1, a|b|c", "Object嵌套Array"));
-testCases.push(new RuleCase(`Array[Object{"id":Number,"names":Array[String]}]`, `1, a;b | 2, c;d`));
+testCases.push(new RuleCase(`Array[Object{"fruit":String}]`, "苹果|香蕉", "Array嵌套Object"));
+testCases.push(new RuleCase(`Array[Object{"fruit":String, "num": Number}]`, "苹果,1|香蕉,2", "Array嵌套Object"));
+testCases.push(new RuleCase(`Array[Object{"fruit":String, "num": Number}]`, "苹果|香蕉", "Array嵌套Object，缺失的num默认值为0"));
+testCases.push(new RuleCase(`Array[Object{"id":Number,"names":Array[String]}]`, `1, a;b | 2, c;d`, "Array Object 深度嵌套"));
 
 export function runTest() {
   testCases.forEach((item) => {
@@ -118,19 +118,6 @@ export class Rule {
    * array的分隔符
    */
   private arraySplitFlags: string[] = ["|", ";", ","];
-  private doTrim(text: string) {
-    text = text.trim();
-    text = text.replace(/\n|\r/g, ""); // 去除换行符
-
-    // 去除开头结尾中的;,
-    if (text[text.length - 1].search(/;|,/) != -1) {
-      text = text.slice(0, text.length - 1);
-    }
-    if (text[0].search(/;|,/) != -1) {
-      text = text.slice(1, text.length);
-    }
-    return text;
-  }
   public transform(rule: string, text: string, arraySplitFlagIndex: number): any {
     rule = rule.trim();
     text = text.trim().replace(/\n|\r/g, "");

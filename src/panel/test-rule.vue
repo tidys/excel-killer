@@ -1,5 +1,5 @@
 <template>
-  <CCSection class="root" name="语法测试" :expand="config.expand_test" @change="onChange">
+  <CCSection class="root" name="语法测试" :expand="config.expand_test_rule" @change="onChange">
     <div class="test">
       <CCProp name="rule" tooltip="转换规则">
         <CCInput :value="rule" @change="onChagneRule"></CCInput>
@@ -26,7 +26,7 @@ import { appStore } from "./store";
 import { Rule } from "./rule";
 
 export default defineComponent({
-  name: "test",
+  name: "test-rule",
   components: { CCButton, CCInput, CCProp, CCTable, CCSection, CCCheckBox },
   setup() {
     const rule = ref("Array[String]");
@@ -45,7 +45,7 @@ export default defineComponent({
         text.value = v;
       },
       onChange(b: boolean) {
-        appStore().config.expand_test = !!b;
+        appStore().config.expand_test_rule = !!b;
         appStore().save();
       },
       onBtnClickTransform() {

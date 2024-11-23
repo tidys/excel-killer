@@ -1,7 +1,8 @@
 <template>
   <div class="panel">
     <div class="view-root ccui-scrollbar">
-      <Test></Test>
+      <TestExcel></TestExcel>
+      <TestRule></TestRule>
       <Desc></Desc>
       <Excel></Excel>
       <ConfigTs></ConfigTs>
@@ -31,7 +32,8 @@ import Excel from "./excel.vue";
 import ConfigTs from "./config-ts.vue";
 import ConfigSql from "./config-sql.vue";
 import Desc from "./desc.vue";
-import Test from "./test.vue";
+import TestRule from "./test-rule.vue";
+import TestExcel from "./test-excel.vue";
 import { appStore } from "./store";
 import { existsSync, mkdirSync } from "fs";
 import chokidar from "chokidar";
@@ -42,7 +44,7 @@ import { Gen } from "./gen";
 const { CCInput, CCButton, CCProp, CCSection, CCCheckBox, CCDialog, CCMenu, CCFootBar } = ccui.components;
 export default defineComponent({
   name: "index",
-  components: { Test, Desc, ConfigSql, ConfigTs, Excel, CCButton, CCInput, CCProp, CCSection, CCDialog, CCMenu, CCFootBar, CCCheckBox, ExportConfig, ConfigJson, ConfigJs },
+  components: { TestRule, TestExcel, Desc, ConfigSql, ConfigTs, Excel, CCButton, CCInput, CCProp, CCSection, CCDialog, CCMenu, CCFootBar, CCCheckBox, ExportConfig, ConfigJson, ConfigJs },
   setup() {
     appStore().init();
     onMounted(async () => {
