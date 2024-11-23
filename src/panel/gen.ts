@@ -3,6 +3,7 @@ import { join } from "path";
 import { ConfigData, DirClientName, DirServerName, ItemData } from "./const";
 import CCP from "cc-plugin/src/ccp/entry-render";
 import jszip from "jszip";
+import { Rule } from "./rule";
 export class Gen {
   private isMergeJson: boolean = false;
   private isFormatJson: boolean = false;
@@ -128,6 +129,8 @@ export class Gen {
       }
       this.parseExcelData(itemSheet);
     }
+    console.log(this.jsonAllClientData);
+    return;
     let zip: null | jszip = null;
     if (CCP.Adaptation.Env.isWeb) {
       zip = new jszip();
@@ -355,225 +358,15 @@ export class Gen {
     zip && zip.file(path, str);
     return str;
   }
+
   /**
    * 切割字符串数据
    * @param {string} rule 规则字符串
    * @param {string} text 数据字符串
    */
   cutString(rule: string, text: string) {
-    let result = null;
-
-    if (typeof text == "string") {
-      text = text.trim();
-      text = text.replace(/\n|\r/g, "");
-
-      if (text[text.length - 1].search(/;|,/) != -1) {
-        text = text.slice(0, text.length - 1);
-      } else if (text[0].search(/;|,/) != -1) {
-        text = text.slice(1, text.length);
-      }
-    }
-
-    // {1,2};{3,4}
-    // {1,[2;3]};{4,[5,6]}
-    // {1,2,[String;String]};{3,4,[String;String]}
-    // {1,2,String};{3,4,String}
-    if (rule.search(/Array\[Object\{[a-zA-Z0-9\[\]:,"]*\}\]/) != -1) {
-      result = [];
-
-      // 替换数据中的字符串为 “String” 形式
-      if (rule.search(/String/) != -1) {
-        const stringData = text.match(/[^(\[|\]|;|:)|\{|\}|,]+/g);
-        const noneDuplicates = [];
-        const noNumberReg = /^\d+(\.\d+)?$/;
-        for (const value of stringData) {
-          if (!noNumberReg.test(value)) {
-            noneDuplicates.push(value);
-          }
-        }
-
-        for (const value of noneDuplicates) {
-          const notHead = text.search(eval(`/^[${value}]/`)) == -1;
-          const searchReg = new RegExp(notHead ? `[^(")]${value}{1}[;|\\]|,|}]` : `^${value}{1}[;|\\]|,|}]`);
-          let index = text.search(searchReg);
-
-          if (index != -1) {
-            index = index + (notHead ? 1 : 0);
-            text = text.slice(0, index) + `"${value}"` + text.slice(index + value.length, text.length);
-          }
-        }
-      }
-
-      let array = null;
-      const insideResult = rule.match(/Object\{[a-zA-Z0-9\[\]:,"]*\}/);
-
-      if (insideResult[0].indexOf("Array") == -1) {
-        const textArray = text.split(";");
-        array = [];
-        for (const item of textArray) {
-          array.push(`{${item}}`);
-        }
-      } else {
-        array = text.match(/{[^({|})]*}/g);
-      }
-
-      const dataArray = [];
-      array.forEach((item) => {
-        let element = item.replace(/\{/g, "[");
-        element = element.replace(/\}/g, "]");
-        element = element.replace(/;/g, ",");
-        element = JSON.parse(element);
-
-        dataArray.push(element);
-      });
-
-      const keys = [];
-      const reg = /"([a-zA-Z0-9]*)":/g;
-      let test = reg.exec(rule);
-
-      while (test) {
-        const key = test[0].replace(/(:|\")/g, "");
-        keys.push(key);
-
-        test = reg.exec(rule);
-      }
-
-      for (let i = 0; i < dataArray.length; ++i) {
-        const obj = {};
-        const data = dataArray[i];
-
-        let index = 0;
-        for (const key of keys) {
-          obj[key] = data[index];
-          index++;
-        }
-
-        result.push(obj);
-      }
-    }
-    // [1;2];[3;4]
-    // [1;2]
-    else if (rule.search(/Array\[Array\[Number\]\]/) === 0 || rule.search(/Array\[Number\]/) === 0) {
-      let str = `[${text}]`;
-      str = str.replace(/;/g, ",");
-      result = JSON.parse(str);
-    }
-    // String;String
-    else if (rule.search(/Array\[String\]/) === 0) {
-      let newText = "";
-
-      const textArray = text.match(/[^(\[|\]|;)]+/g);
-      let index = 0;
-      const edge = textArray.length;
-
-      for (const subString of textArray) {
-        newText = `${newText}"${subString}"`;
-        index++;
-
-        if (index == edge) {
-          break;
-        }
-
-        newText += ",";
-      }
-
-      newText = `[${newText}]`;
-      newText = newText.replace(/;/g, ",");
-
-      try {
-        result = JSON.parse(newText);
-      } catch (exception) {
-        debugger;
-      }
-    }
-    // [String;String];[String;String]
-    else if (rule.search(/Array\[Array\[String\]\]/) === 0) {
-      result = [];
-
-      const array = text.match(/\[[^(\[|\])]*\]/g);
-
-      for (const item of array) {
-        const textArray = item.match(/[^(\[|\]|;)]+/g);
-        let newText = "";
-        let index = 0;
-        const edge = textArray.length - 1;
-        for (const subString of textArray) {
-          newText = `${newText}"${subString}"`;
-          index++;
-
-          if (index == edge) {
-            break;
-          }
-
-          newText += ",";
-        }
-
-        newText = `[${newText}]`;
-
-        const json = JSON.parse(newText);
-        result.push(json);
-      }
-    } else if (rule.search(/Object\{[a-zA-Z0-9\[\]:,"]*\}/) === 0) {
-      result = {};
-
-      if (rule.search(/String/) != -1) {
-        const stringData = text.match(/[^(\[|\]|;|:)|\{|\}|,]+/g);
-        const noneDuplicates = [];
-        const noNumberReg = /^\d+(\.\d+)?$/;
-        for (const value of stringData) {
-          if (!noNumberReg.test(value)) {
-            noneDuplicates.push(value);
-          }
-        }
-
-        for (const value of noneDuplicates) {
-          const notHead = text.search(eval(`/^[${value}]/`)) == -1;
-          const searchReg = new RegExp(notHead ? `[^(")]${value}{1}[;|\\]|,|}]` : `^${value}{1}[;|\\]|,|}]`);
-          let index = text.search(searchReg);
-
-          if (index != -1) {
-            index = index + (notHead ? 1 : 0);
-            text = text.slice(0, index) + `"${value}"` + text.slice(index + value.length, text.length);
-          }
-        }
-      }
-
-      const keys = [];
-      const reg = /"([a-zA-Z0-9]*)":/g;
-      let test = reg.exec(rule);
-
-      while (test) {
-        const key = test[0].replace(/(:|\")/g, "");
-        keys.push(key);
-
-        test = reg.exec(rule);
-      }
-
-      let str = `[${text}]`;
-      str = str.replace(/;/g, ",");
-
-      let json = null;
-      try {
-        json = JSON.parse(str);
-      } catch (e) {
-        debugger;
-      }
-
-      let index = 0;
-      for (const key of keys) {
-        result[key] = json[index];
-        index++;
-      }
-    }
-    // 1
-    else if (rule.search("Number") === 0) {
-      result = Number(text);
-    }
-    // String
-    else if (rule.search("String") === 0) {
-      result = text;
-    }
-
+    const r = new Rule();
+    const result = r.transform(rule, text, 0);
     return result;
   }
 }

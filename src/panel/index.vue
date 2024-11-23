@@ -1,6 +1,8 @@
 <template>
   <div class="panel">
     <div class="view-root ccui-scrollbar">
+      <Test></Test>
+      <Desc></Desc>
       <Excel></Excel>
       <ConfigTs></ConfigTs>
       <ConfigJs></ConfigJs>
@@ -28,6 +30,8 @@ import ConfigJs from "./config-js.vue";
 import Excel from "./excel.vue";
 import ConfigTs from "./config-ts.vue";
 import ConfigSql from "./config-sql.vue";
+import Desc from "./desc.vue";
+import Test from "./test.vue";
 import { appStore } from "./store";
 import { existsSync, mkdirSync } from "fs";
 import chokidar from "chokidar";
@@ -38,7 +42,7 @@ import { Gen } from "./gen";
 const { CCInput, CCButton, CCProp, CCSection, CCCheckBox, CCDialog, CCMenu, CCFootBar } = ccui.components;
 export default defineComponent({
   name: "index",
-  components: { ConfigSql, ConfigTs, Excel, CCButton, CCInput, CCProp, CCSection, CCDialog, CCMenu, CCFootBar, CCCheckBox, ExportConfig, ConfigJson, ConfigJs },
+  components: { Test, Desc, ConfigSql, ConfigTs, Excel, CCButton, CCInput, CCProp, CCSection, CCDialog, CCMenu, CCFootBar, CCCheckBox, ExportConfig, ConfigJson, ConfigJs },
   setup() {
     appStore().init();
     onMounted(async () => {
@@ -84,6 +88,7 @@ export default defineComponent({
   flex-direction: column;
   height: 100%;
   width: 100%;
+
   .view-root {
     flex: 1;
     padding: 10px;
@@ -91,6 +96,7 @@ export default defineComponent({
     overflow-y: auto;
     overflow-x: hidden;
   }
+
   .bottom {
     display: flex;
     flex-direction: row;

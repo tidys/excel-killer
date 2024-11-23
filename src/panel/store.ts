@@ -29,6 +29,8 @@ export const appStore = defineStore("app", () => {
       config.value.expand_excel = data.expand_excel;
       config.value.expand_json = data.expand_json;
       config.value.expand_js = data.expand_js;
+      config.value.expand_desc = data.expand_desc;
+      config.value.expand_test = data.expand_test;
       config.value.expand_lua = data.expand_lua;
       config.value.expand_export = data.expand_export;
       config.value.ts_merge = data.ts_merge;
