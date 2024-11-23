@@ -1,7 +1,7 @@
-# excel-killer
+# excel-killer-plus
 ## 插件说明:
 该插件使用[cc-plugin](https://www.npmjs.com/package/cc-plugin)开发，同时支持creator2.x， creator3.x、并且还支持[web在线使用](https://tidys.github.io/excel-killer/main.html)，插件完全
-[开源](https://github.com/tidys/excel-killer)免费，有需要前往[store下载](https://store.cocos.com/app/detail/2016)。
+[开源](https://github.com/tidys/excel-killer)，有需要前往[store下载](https://store.cocos.com/app/detail/2016)，插件的用户体验做的非常用心，希望能够成为你游戏开发道路上的必备工具。
 
 插件会展示指定目录下所有excel的sheet，并统计出excel、sheet的数量，可以导出指定的sheet，默认全部导出
 
@@ -14,7 +14,7 @@
 - excel转`JavaScript`
 - excel转`TypeScript`
 
-## 格式转换说明
+## Excel格式说明
 Excel支持的格式: `*.xlsx`, `*.xls`
 
 |   id   | fruit  |   cost |  num   |                              all                              |
@@ -32,13 +32,20 @@ Excel支持的格式: `*.xlsx`, `*.xls`
 - 第3行: 字段的导出目标，一个表格，前端后端公用
   - 包含有 c 字符的代表导出到client目标
   - 包含有 s字符代表导出到Server目标
-- 第4行(by @我是一只傻狍子)：导出类型，字段的导出规则，支持的类型 (注意:一定是英文的引号,不是中文的! 详见 Test.xlsx 测试用例)
-  - Number
-  - String
-  - Array[Number|String]
-  - Array[Array[Array|String]]
-  - Array[Object{"key1":Number|String|Array[Number|String], ..."keyN"}]
-  - Object{"key1":Number|String|Array[Number|String], ..."keyN"} 
+- 第4行：字段的导出规则，支持的字符串类型、数字类型、数组类型、列表类型、对象类型，并且支持简单的类型嵌套，详细用法见插件内`示例语法`。
+
+在插件的`示例Excel`中，也有对以上信息的简单展示，方便在使用中参考。
+
+![](./doc/excel-test.png)
+## 示例语法
+
+插件内部提供了部分转换规则示例，可作为参考
+
+![](./doc/grammar.png)
+
+在了解转换规则后，如果想测试自己写的转换规则是否符合预期，可以在语法测试面板进行测试，这是非常有必要，而且很重要的一点是，无论是excel转json还是json转excel，都可以在这个面板进行测试。
+
+![](./doc/rule-test.png)
 
 ## EXCEL数据注意事项
 - 尽量不要出现空Sheet，当然插件会自动跳过该Sheet

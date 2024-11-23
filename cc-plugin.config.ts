@@ -1,7 +1,7 @@
 // @ts-ignore
 import { CocosPluginManifest, CocosPluginOptions, Panel, PluginType } from "cc-plugin/src/declare";
 
-const pkgName = "excel-killer";
+const pkgName = "excel-killer-plus";
 
 const manifest: CocosPluginManifest = {
   name: pkgName,
