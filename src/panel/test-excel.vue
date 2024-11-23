@@ -1,5 +1,5 @@
 <template>
-  <CCSection name="Excel示例" :expand="config.expand_test_excel" @change="onChangExpand">
+  <CCSection name="示例Excel" :expand="config.expand_test_excel" @change="onChangExpand">
     <table>
       <tr class="head1" title="数据的键值">
         <td>id</td>

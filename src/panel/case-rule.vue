@@ -1,5 +1,5 @@
 <template>
-  <CCSection class="root" name="语法示例" :expand="config.expand_desc" @change="onChange">
+  <CCSection class="root" name="示例语法" :expand="config.expand_desc" @change="onChange">
     <table class="table">
       <tr class="head">
         <td>说明</td>
@@ -26,7 +26,7 @@ import { appStore } from "./store";
 import { RuleCase, runTest, testCases, testRules } from "./rule";
 
 export default defineComponent({
-  name: "desc",
+  name: "case-rule",
   components: { CCButton, CCInput, CCProp, CCTable, CCSection, CCCheckBox },
   setup() {
     const { config } = storeToRefs(appStore());
@@ -64,6 +64,9 @@ export default defineComponent({
       background-color: #fff;
       .op {
         cursor: pointer;
+        &:hover {
+          background-color: #e9e9e9;
+        }
       }
     }
     td {
