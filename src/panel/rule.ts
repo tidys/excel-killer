@@ -120,7 +120,7 @@ export class Rule {
   private arraySplitFlags: string[] = ["|", ";", ","];
   public transform(rule: string, text: string, arraySplitFlagIndex: number): any {
     rule = rule.trim();
-    text = text.trim().replace(/\n|\r/g, "");
+    text = text.toString().trim().replace(/\n|\r/g, "");
     const type = checkType(rule);
     switch (type) {
       case Type.String: {

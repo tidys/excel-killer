@@ -130,7 +130,6 @@ export class Gen {
       this.parseExcelData(itemSheet);
     }
     console.log(this.jsonAllClientData);
-    return;
     let zip: null | jszip = null;
     if (CCP.Adaptation.Env.isWeb) {
       zip = new jszip();
