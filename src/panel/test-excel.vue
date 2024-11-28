@@ -1,6 +1,6 @@
 <template>
   <CCSection name="示例Excel" :expand="config.expand_test_excel" @change="onChangExpand">
-    <table>
+    <table style="color: black">
       <tr class="head1" title="数据的键值">
         <td>id</td>
         <td>name</td>

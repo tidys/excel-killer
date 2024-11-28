@@ -1,5 +1,5 @@
 <template>
-  <CCSection class="root" name="语法测试" :expand="config.expand_test_rule" @change="onChange">
+  <CCSection class="test-rule" name="语法测试" :expand="config.expand_test_rule" @change="onChange">
     <div class="test">
       <CCProp name="rule" tooltip="转换规则">
         <CCInput :value="rule" @change="onChagneRule"></CCInput>
@@ -62,12 +62,15 @@ export default defineComponent({
 });
 </script>
 <style lang="less" scoped>
-.test {
-  display: flex;
-  flex-direction: column;
-  .op {
+.test-rule {
+  color: black;
+  .test {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    .op {
+      display: flex;
+      flex-direction: row;
+    }
   }
 }
 </style>

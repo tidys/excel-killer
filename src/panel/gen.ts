@@ -1,4 +1,4 @@
-import { emptyDirSync, existsSync, writeFileSync } from "fs-extra";
+import { emptyDirSync, ensureFileSync, existsSync, writeFileSync } from "fs-extra";
 import { join } from "path";
 import { ConfigData, DirClientName, DirServerName, ItemData } from "./const";
 import CCP from "cc-plugin/src/ccp/entry-render";
@@ -176,6 +176,7 @@ export class Gen {
   }
   private saveTsFile(data: any, path: string, zip: null | jszip) {
     const str = "export default " + JSON.stringify(data, null, 2) + ";";
+    ensureFileSync(path);
     writeFileSync(path, str);
     console.log("[TypeScript]" + path);
     zip && zip.file(path, str);
@@ -345,6 +346,7 @@ export class Gen {
   }
   saveJsonFile(data: any, path: string, zip: null | jszip) {
     const str = JSON.stringify(data, null, this.isFormatJson ? 2 : 0);
+    ensureFileSync(path);
     writeFileSync(path, str);
     console.log("[Json]:" + path);
     zip && zip.file(path, str);
@@ -352,6 +354,7 @@ export class Gen {
   }
   saveJavaScriptFile(path: string, data: any, zip: null | jszip) {
     const str = "module.exports =" + JSON.stringify(data, null, this.isFormatJsCode ? 2 : 0) + ";";
+    ensureFileSync(path);
     writeFileSync(path, str);
     console.log("[JavaScript]" + path);
     zip && zip.file(path, str);

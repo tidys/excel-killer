@@ -57,6 +57,7 @@ export default defineComponent({
 <style lang="less" scoped>
 .root {
   .table {
+    color: black;
     .head {
       background-color: #d9d9d9;
     }
