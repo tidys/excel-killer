@@ -1224,10 +1224,10 @@
   resolved "https://registry.yarnpkg.com/@xuyanfeng/fs-browserify/-/fs-browserify-1.0.0.tgz#808811e8d7e2fb8bcad9fd7290a4ca0f280bc585"
   integrity sha512-Tir61SPNwFLSRE18QsD8vJZg78td9+uDDUnyWB/iP896zhqhzXlqJnPOKOIZEPs4dQ1IqjZZfFwJ9STIH2uD+A==
 
-"@xuyanfeng/fs-extra-browserify@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@xuyanfeng/fs-extra-browserify/-/fs-extra-browserify-1.0.1.tgz#d20e9ae6f48f9027add4679bac9b40bb9249b60c"
-  integrity sha512-K+bLekY4iiZ/PD/SU15VvyZrIxiOCv4TB/YUBev+is/jHoGYasV4lCJParBSAUbLcm6hFifcq3Y9Pi4dQAGhug==
+"@xuyanfeng/fs-extra-browserify@^1.0.2":
+  version "1.0.2"
+  resolved "https://mirrors.cloud.tencent.com/npm/@xuyanfeng/fs-extra-browserify/-/fs-extra-browserify-1.0.2.tgz#64c7e571aa0e881c47f2c15d33a42a81a74c2ab5"
+  integrity sha512-vbysPDyzcMdliomc6CfoF/zZ3BoPScR9ObdZIjZ9Tf6yf6L1vNI9PLJxM6bL/LYv5QupqRzMQ5awkiCy+pFuyw==
 
 "@xuyanfeng/globby-browserify@^1.0.0":
   version "1.0.0"
@@ -1988,10 +1988,10 @@ case-sensitive-paths-webpack-plugin@^2.3.0:
   resolved "https://registry.yarnpkg.com/case-sensitive-paths-webpack-plugin/-/case-sensitive-paths-webpack-plugin-2.4.0.tgz#db64066c6422eed2e08cc14b986ca43796dbc6d4"
   integrity sha512-roIFONhcxog0JSSWbvVAh3OocukmSgpqOH6YpMkCvav/ySIV3JKg4Dc8vYtQjYi/UxpNE36r/9v+VqTQqgkYmw==
 
-cc-plugin@^2.1.57:
-  version "2.1.57"
-  resolved "https://mirrors.cloud.tencent.com/npm/cc-plugin/-/cc-plugin-2.1.57.tgz#8f25dc0ccc859567f26c2d2251ddfa9c8b5356e6"
-  integrity sha512-sMAQ8gFsML7QXc0iNZKFYePH0576SVa4Oet6JQcQYxdguA9UvKtx/7V5+LhepTOs7wHfQGomAsotaLjcjIMkwA==
+cc-plugin@^2.1.60:
+  version "2.1.60"
+  resolved "https://mirrors.cloud.tencent.com/npm/cc-plugin/-/cc-plugin-2.1.60.tgz#504e5d5100956fe07b521dd721887efc1fa0b3d5"
+  integrity sha512-9esBD2vFORyI3uc2QkfdGdbvv3aZqfSyRpF4YVHLXZZoURCYZnjLr+yhFk+Vla7y1TijWZNCxXsPnWmYrTWVLw==
   dependencies:
     "@babel/generator" "^7.16.8"
     "@popperjs/core" "^2.11.6"
@@ -2000,7 +2000,7 @@ cc-plugin@^2.1.57:
     "@xuyanfeng/chokidar-browserify" "^1.0.1"
     "@xuyanfeng/express-browserify" "^1.0.0"
     "@xuyanfeng/fs-browserify" "^1.0.0"
-    "@xuyanfeng/fs-extra-browserify" "^1.0.1"
+    "@xuyanfeng/fs-extra-browserify" "^1.0.2"
     "@xuyanfeng/globby-browserify" "^1.0.0"
     "@xuyanfeng/sharp-browserify" "^1.0.0"
     assert "^2.0.0"
