@@ -70,6 +70,12 @@ export default defineComponent({
           CCP.Adaptation.Shell.openUrl(url);
         },
       });
+      ccui.footbar.registerCmd({
+        icon: "cocos",
+        cb() {
+          CCP.Adaptation.Shell.openUrl("https://store.cocos.com/app/detail/7022");
+        },
+      });
     });
     const version = ref(PluginConfig.manifest.version);
     const isWeb = ref(CCP.Adaptation.Env.isWeb);

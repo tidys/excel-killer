@@ -1185,10 +1185,10 @@
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
-"@xuyanfeng/cc-ui@^0.2.33":
-  version "0.2.33"
-  resolved "https://mirrors.cloud.tencent.com/npm/@xuyanfeng/cc-ui/-/cc-ui-0.2.33.tgz#749b0f914a8ab1c49cf5774531977211e3393476"
-  integrity sha512-w3jpTiD8rj90JfOQpu47FBzcaplgoaGmTmSvGmjKaHAIheqSVfKLF1dlnSgQAYCqpBqzwm8HCLZpWXq3NsEe6Q==
+"@xuyanfeng/cc-ui@0.2.34":
+  version "0.2.34"
+  resolved "https://mirrors.cloud.tencent.com/npm/@xuyanfeng/cc-ui/-/cc-ui-0.2.34.tgz#e882e3925841a0a2c414261cd014f0e1c535a3ea"
+  integrity sha512-1sgekM57mM1ntSHAJgtgGeqq/7L67MyUIT00u8/o/26nh+bPXCJOrvp8t7Jxl10qOp8ZYyzHntulqFS6rlAslg==
   dependencies:
     axios "^1.7.2"
     chalk "^5.3.0"
