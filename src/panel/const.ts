@@ -27,6 +27,10 @@ export interface ItemData {
 }
 export class ConfigData {
   /**
+   * 导出前清空上次生成的数据，如果你想导出部分数据，该选项需要设置为不清理
+   */
+  cleanGenResult: boolean = false;
+  /**
    * 导出服务端字段
    */
   exportServer: boolean = false;

@@ -21,10 +21,12 @@ export class Gen {
   private isExportJs: boolean = false;
   private isMergeJavaScript: boolean = false;
   private isMergeTs: boolean = false;
+  private cleanGenResult: boolean = true;
   private _addLog(log: string) {
     throw new Error(log);
   }
   public ready(cfg: ConfigData) {
+    this.cleanGenResult = cfg.cleanGenResult;
     this.isMergeJson = cfg.json_merge;
     this.isMergeTs = cfg.ts_merge;
     this.isMergeJavaScript = cfg.js_merge;
@@ -100,9 +102,7 @@ export class Gen {
    * ```
    */
   private jsonAllServerData = {};
-
-  async doWork(data: ItemData[]): Promise<void> {
-    // 删除老的配置
+  private async cleanLatestExportResult() {
     const arr = [this.jsonSavePath, this.tsSavePath, this.jsSavePath];
     const dirArray = [DirClientName, DirServerName];
     for (let i = 0; i < arr.length; i++) {
@@ -123,6 +123,12 @@ export class Gen {
           }
         }
       }
+    }
+  }
+  async doWork(data: ItemData[]): Promise<void> {
+    if (this.cleanGenResult) {
+      // 删除老的配置
+      await this.cleanLatestExportResult();
     }
 
     for (let k = 0; k < data.length; k++) {

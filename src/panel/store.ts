@@ -14,6 +14,7 @@ export const appStore = defineStore("app", () => {
       config.value.excel_root_path = data.excel_root_path;
       config.value.exportClient = data.exportClient;
       config.value.exportServer = data.exportServer;
+      config.value.cleanGenResult = data.cleanGenResult;
       config.value.exportJson = data.exportJson;
       config.value.json_merge = data.json_merge;
       config.value.json_all_cfg_file_name = data.json_all_cfg_file_name;
