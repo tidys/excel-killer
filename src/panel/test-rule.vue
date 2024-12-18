@@ -18,12 +18,12 @@
   </CCSection>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from "vue";
 import ccui from "@xuyanfeng/cc-ui";
 import { storeToRefs } from "pinia";
-const { CCInput, CCButton, CCProp, CCTable, CCSection, CCCheckBox } = ccui.components;
-import { appStore } from "./store";
+import { defineComponent, ref } from "vue";
 import { Rule } from "./rule";
+import { appStore } from "./store";
+const { CCInput, CCButton, CCProp, CCTable, CCSection, CCCheckBox } = ccui.components;
 
 export default defineComponent({
   name: "test-rule",

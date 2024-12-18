@@ -13,9 +13,9 @@
 </template>
 
 <script lang="ts">
+import ccui from "@xuyanfeng/cc-ui";
 import { PropType, defineComponent, ref } from "vue";
 import { ItemData } from "./const";
-import ccui from "@xuyanfeng/cc-ui";
 const { CCCheckBox } = ccui.components;
 export default defineComponent({
   name: "excel-item",

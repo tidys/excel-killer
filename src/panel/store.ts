@@ -1,10 +1,9 @@
-import { defineStore } from "pinia";
-import { ConfigData, DirJsName, DirJsonName } from "./const";
-import { ref } from "vue";
-import profile from "cc-plugin/src/ccp/profile";
-import pluginConfig from "../../cc-plugin.config";
-import { toRaw } from "vue";
 import CCP from "cc-plugin/src/ccp/entry-render";
+import profile from "cc-plugin/src/ccp/profile";
+import { defineStore } from "pinia";
+import { ref, toRaw } from "vue";
+import pluginConfig from "../../cc-plugin.config";
+import { ConfigData, DirJsName, DirJsonName } from "./const";
 export const appStore = defineStore("app", () => {
   const config = ref<ConfigData>(new ConfigData());
   return {

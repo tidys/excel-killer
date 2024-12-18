@@ -6,15 +6,15 @@
   </CCSection>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, ref, provide, nextTick } from "vue";
-import PluginConfig from "../../cc-plugin.config";
 import ccui from "@xuyanfeng/cc-ui";
-import { storeToRefs } from "pinia";
-import { appStore } from "./store";
-import { config } from "process";
 import CCP from "cc-plugin/src/ccp/entry-main";
-import { sqlInstance } from "./sql";
 import { basename, extname } from "path";
+import { storeToRefs } from "pinia";
+import { config } from "process";
+import { defineComponent, nextTick, onMounted, provide, ref } from "vue";
+import PluginConfig from "../../cc-plugin.config";
+import { sqlInstance } from "./sql";
+import { appStore } from "./store";
 const { CCInput, CCButton, CCProp, CCSection, CCCheckBox } = ccui.components;
 export default defineComponent({
   name: "index",

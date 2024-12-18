@@ -27,21 +27,21 @@
   </CCSection>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, ref, provide, nextTick, toRaw, onUnmounted } from "vue";
-import PluginConfig from "../../cc-plugin.config";
 import ccui from "@xuyanfeng/cc-ui";
-import ExcelItem from "./excel-item.vue";
 import CCP from "cc-plugin/src/ccp/entry-main";
-import { appStore } from "./store";
-import { ItemData, emitter, Msg } from "./const";
+import chokidar from "chokidar";
 import { existsSync, readFileSync, readdirSync, statSync } from "fs";
-import { basename, extname, join } from "path";
 import nodeXlsx from "node-xlsx";
+import { basename, extname, join } from "path";
+import { storeToRefs } from "pinia";
+import { defineComponent, nextTick, onMounted, onUnmounted, provide, ref, toRaw } from "vue";
+import PluginConfig from "../../cc-plugin.config";
+import { ItemData, Msg, emitter } from "./const";
+import ExcelItem from "./excel-item.vue";
+import { Gen } from "./gen";
+import { appStore } from "./store";
 
 const { CCInput, CCButton, CCProp, CCSection, CCCheckBox } = ccui.components;
-import chokidar from "chokidar";
-import { storeToRefs } from "pinia";
-import { Gen } from "./gen";
 export default defineComponent({
   name: "index",
   components: { CCButton, CCInput, CCProp, CCSection, CCCheckBox, ExcelItem },

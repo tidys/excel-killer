@@ -1,9 +1,9 @@
+import ccui from "@xuyanfeng/cc-ui";
 import CCP from "cc-plugin/src/ccp/entry-main";
 import { existsSync } from "fs";
 import { join } from "path";
-import { appStore } from "./store";
 import { toRaw } from "vue";
-import ccui from "@xuyanfeng/cc-ui";
+import { appStore } from "./store";
 export async function importJsonCfg(typeDir: string) {
   const importProjectCfgPath = toRaw(appStore().config).json_import_project_cfg_path;
   if (!existsSync(importProjectCfgPath)) {

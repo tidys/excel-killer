@@ -17,13 +17,13 @@
   </CCSection>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from "vue";
 import ccui from "@xuyanfeng/cc-ui";
-import { storeToRefs } from "pinia";
-const { CCInput, CCButton, CCProp, CCTable, CCSection, CCCheckBox } = ccui.components;
 import { TableData } from "@xuyanfeng/cc-ui/types/cc-table/const";
-import { appStore } from "./store";
+import { storeToRefs } from "pinia";
+import { defineComponent, ref } from "vue";
 import { RuleCase, runTest, testCases, testRules } from "./rule";
+import { appStore } from "./store";
+const { CCInput, CCButton, CCProp, CCTable, CCSection, CCCheckBox } = ccui.components;
 
 export default defineComponent({
   name: "case-rule",

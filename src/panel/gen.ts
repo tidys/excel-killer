@@ -1,8 +1,8 @@
+import CCP from "cc-plugin/src/ccp/entry-render";
 import { emptyDirSync, ensureFileSync, existsSync, writeFileSync } from "fs-extra";
+import jszip from "jszip";
 import { join } from "path";
 import { ConfigData, DirClientName, DirServerName, ItemData } from "./const";
-import CCP from "cc-plugin/src/ccp/entry-render";
-import jszip from "jszip";
 import { Rule } from "./rule";
 export class Gen {
   private isMergeJson: boolean = false;

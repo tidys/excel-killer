@@ -33,11 +33,11 @@
   </CCSection>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from "vue";
 import ccui from "@xuyanfeng/cc-ui";
 import { storeToRefs } from "pinia";
-const { CCInput, CCButton, CCProp, CCTable, CCSection, CCCheckBox } = ccui.components;
+import { defineComponent, ref } from "vue";
 import { appStore } from "./store";
+const { CCInput, CCButton, CCProp, CCTable, CCSection, CCCheckBox } = ccui.components;
 export default defineComponent({
   name: "TestExcel",
   components: { CCButton, CCInput, CCProp, CCTable, CCSection, CCCheckBox },

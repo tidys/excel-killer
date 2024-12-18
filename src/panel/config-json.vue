@@ -35,16 +35,16 @@
   </CCSection>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, ref, provide, nextTick, toRaw } from "vue";
-import PluginConfig from "../../cc-plugin.config";
 import ccui from "@xuyanfeng/cc-ui";
 import { ButtonGroupItem } from "@xuyanfeng/cc-ui/types/cc-button-group/const";
 import CCP from "cc-plugin/src/ccp/entry-render";
-import { storeToRefs } from "pinia";
-import { appStore } from "./store";
 import { existsSync } from "fs";
 import { join } from "path";
+import { storeToRefs } from "pinia";
+import { defineComponent, nextTick, onMounted, provide, ref, toRaw } from "vue";
+import PluginConfig from "../../cc-plugin.config";
 import { DirClientName, DirServerName } from "./const";
+import { appStore } from "./store";
 import { importJsonCfg } from "./util";
 const { CCInput, CCButton, CCButtonGroup, CCProp, CCSection, CCCheckBox } = ccui.components;
 export default defineComponent({

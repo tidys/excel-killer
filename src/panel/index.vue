@@ -22,25 +22,25 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref, provide, nextTick } from "vue";
-import PluginConfig from "../../cc-plugin.config";
 import ccui from "@xuyanfeng/cc-ui";
-import ExportConfig from "./export-config.vue";
-import ConfigJson from "./config-json.vue";
-import ConfigJs from "./config-js.vue";
-import Excel from "./excel.vue";
-import ConfigTs from "./config-ts.vue";
-import ConfigSql from "./config-sql.vue";
-import CaseRule from "./case-rule.vue";
-import TestRule from "./test-rule.vue";
-import TestExcel from "./test-excel.vue";
-import { appStore } from "./store";
-import { existsSync, mkdirSync } from "fs";
-import chokidar from "chokidar";
 import CCP from "cc-plugin/src/ccp/entry-main";
+import chokidar from "chokidar";
+import { existsSync, mkdirSync } from "fs";
 import { join } from "path";
-import { Msg, DirClientName, DirServerName, emitter } from "./const";
+import { defineComponent, nextTick, onMounted, provide, ref } from "vue";
+import PluginConfig from "../../cc-plugin.config";
+import CaseRule from "./case-rule.vue";
+import ConfigJs from "./config-js.vue";
+import ConfigJson from "./config-json.vue";
+import ConfigSql from "./config-sql.vue";
+import ConfigTs from "./config-ts.vue";
+import { DirClientName, DirServerName, emitter, Msg } from "./const";
+import Excel from "./excel.vue";
+import ExportConfig from "./export-config.vue";
 import { Gen } from "./gen";
+import { appStore } from "./store";
+import TestExcel from "./test-excel.vue";
+import TestRule from "./test-rule.vue";
 const { CCInput, CCButton, CCProp, CCSection, CCCheckBox, CCDialog, CCMenu, CCFootBar } = ccui.components;
 export default defineComponent({
   name: "index",

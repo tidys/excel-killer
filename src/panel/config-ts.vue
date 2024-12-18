@@ -19,15 +19,15 @@
   </CCSection>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, ref, provide, nextTick, toRaw } from "vue";
-import PluginConfig from "../../cc-plugin.config";
 import ccui from "@xuyanfeng/cc-ui";
-import { storeToRefs } from "pinia";
-import { appStore } from "./store";
+import CCP from "cc-plugin/src/ccp/entry-render";
 import { existsSync } from "fs";
 import { join } from "path";
-import CCP from "cc-plugin/src/ccp/entry-render";
+import { storeToRefs } from "pinia";
+import { defineComponent, nextTick, onMounted, provide, ref, toRaw } from "vue";
+import PluginConfig from "../../cc-plugin.config";
 import { DirClientName, DirServerName } from "./const";
+import { appStore } from "./store";
 const { CCInput, CCButton, CCProp, CCSection, CCCheckBox } = ccui.components;
 export default defineComponent({
   name: "config-ts",
