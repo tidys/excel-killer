@@ -1,5 +1,5 @@
 import CCP from "cc-plugin/src/ccp/entry-render";
-import { emptyDirSync, ensureFileSync, existsSync, writeFileSync } from "fs-extra";
+import { emptyDirSync, ensureFileSync, existsSync, unlinkSync, writeFileSync } from "fs-extra";
 import jszip from "jszip";
 import { join } from "path";
 import { ConfigData, DirClientName, DirServerName, ItemData } from "./const";
@@ -103,14 +103,27 @@ export class Gen {
 
   async doWork(data: ItemData[]): Promise<void> {
     // 删除老的配置
-    [this.jsonSavePath, this.tsSavePath, this.jsSavePath].forEach((item) => {
-      [DirClientName, DirServerName].forEach((dir) => {
-        const fullPath = join(item, dir);
-        if (existsSync(fullPath)) {
-          emptyDirSync(fullPath);
+    const arr = [this.jsonSavePath, this.tsSavePath, this.jsSavePath];
+    const dirArray = [DirClientName, DirServerName];
+    for (let i = 0; i < arr.length; i++) {
+      const item = arr[i];
+      if (item) {
+        for (let j = 0; j < dirArray.length; j++) {
+          const dir = dirArray[j];
+          const fullPath = join(item, dir);
+          if (existsSync(fullPath)) {
+            const rule = join(fullPath, "**/*.*").replace(/\\/g, "/");
+            const files = await CCP.Adaptation.Util.glob(`${rule}`);
+            files.forEach((item) => {
+              // 不删除meta文件
+              if (!item.endsWith(".meta")) {
+                unlinkSync(item);
+              }
+            });
+          }
         }
-      });
-    });
+      }
+    }
 
     for (let k = 0; k < data.length; k++) {
       const itemSheet = data[k];
