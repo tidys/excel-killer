@@ -65,17 +65,17 @@ export function testRules() {
   console.log(JSON.stringify(ret, null, 2));
 }
 
-function checkType(rule: string): Type {
-  rule = rule.trim();
-  if (/^Number$/g.test(rule)) {
+export function checkType(rule: string): Type {
+  rule = rule.trim().toLowerCase();
+  if (/^number$/g.test(rule)) {
     return Type.Number;
-  } else if (/^String$/g.test(rule)) {
+  } else if (/^string$/g.test(rule)) {
     return Type.String;
-  } else if (/^List\[.*\]$/g.test(rule)) {
+  } else if (/^list\[.*\]$/g.test(rule)) {
     return Type.List;
-  } else if (/^Array\[.*\]$/g.test(rule)) {
+  } else if (/^array\[.*\]$/g.test(rule)) {
     return Type.Array;
-  } else if (/^Object\{.*\}$/g.test(rule)) {
+  } else if (/^object\{.*\}$/g.test(rule)) {
     return Type.Object;
   }
   return Type.None;
