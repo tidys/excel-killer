@@ -130,7 +130,7 @@ export class Rule {
         return Number(text);
       }
       case Type.List: {
-        const key = /^List\[(.*)\]$/g.exec(rule);
+        const key = /^list\[(.*)\]$/g.exec(rule.toLowerCase());
         if (key == null) {
           throw new Error(`无效的规则:${rule}`);
         }
@@ -157,7 +157,7 @@ export class Rule {
       }
       case Type.Array: {
         // 捕获key
-        const key = /^Array\[(.*)\]$/g.exec(rule);
+        const key = /^array\[(.*)\]$/g.exec(rule.toLowerCase());
         if (key == null) {
           throw new Error(`无效的规则:${rule}`);
         }
@@ -183,7 +183,7 @@ export class Rule {
       }
       case Type.Object: {
         // 把里面的key提取出来
-        const key = /^Object\{(.*)\}$/g.exec(rule);
+        const key = /^object\{(.*)\}$/g.exec(rule.toLowerCase());
         if (key == null) {
           throw new Error(`无效的规则:${rule}`);
         }
