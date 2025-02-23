@@ -3,7 +3,7 @@ import { emptyDirSync, ensureFileSync, existsSync, unlinkSync, writeFileSync } f
 import jszip from "jszip";
 import { join } from "path";
 import { ConfigData, DirClientName, DirServerName, ItemData } from "./const";
-import { Rule, Type } from "./rule";
+import { checkType, Rule, Type } from "./rule";
 import { genDtsString } from "./dts";
 export class Gen {
   private isMergeJson: boolean = false;
@@ -335,7 +335,7 @@ export class Gen {
     }
     return true;
   }
-  private doDts(sheet: string, title: string[], desc: string[], rule: Type[]) {
+  private doDts(sheet: string, title: string[], desc: string[], rule: string[]) {
     const len = Math.min(title.length, desc.length);
     const arr: Array<{ key: string; type: Type; desc: string }> = [];
     for (let i = 0; i < len; i++) {
@@ -344,7 +344,7 @@ export class Gen {
       const ruleItem = rule[i];
       arr.push({
         key: keyItem,
-        type: ruleItem,
+        type: checkType(ruleItem),
         desc: descItem,
       });
     }
