@@ -310,6 +310,15 @@ export class Gen {
       }
     }
   }
+  private isNullLine(line: any[]) {
+    for (let i = 0; i < line.length; i++) {
+      const item = line[i];
+      if (item !== null) {
+        return false;
+      }
+    }
+    return true;
+  }
   private splitData(itemSheet: ItemData): { server: any; client: any } {
     const excelData: any[][] = itemSheet.buffer;
     const title = excelData[0];
@@ -327,6 +336,9 @@ export class Gen {
     }
     for (let line = 4; line < excelData.length; line++) {
       const lineData = excelData[line];
+      if (this.isNullLine(lineData)) {
+        continue;
+      }
       const id = lineData[0];
       if (!lineData.length) {
         // skip empty line
