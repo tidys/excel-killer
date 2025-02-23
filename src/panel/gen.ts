@@ -3,7 +3,7 @@ import { emptyDirSync, ensureFileSync, existsSync, unlinkSync, writeFileSync } f
 import jszip from "jszip";
 import { join } from "path";
 import { ConfigData, DirClientName, DirServerName, ItemData } from "./const";
-import { Rule } from "./rule";
+import { Rule, Type } from "./rule";
 export class Gen {
   private isMergeJson: boolean = false;
   private isFormatJson: boolean = false;
@@ -79,11 +79,11 @@ export class Gen {
       }
     }
     if (this.isExportServer === false && this.isExportClient === false) {
-      throw new Error("请选择要导出的目标!");
+      throw new Error("请选择要导出的目标[客户端/服务端]!");
     }
 
     if (this.isExportJson === false && this.isExportJs === false && this.isExportTs === false) {
-      throw new Error("请选择要导出的类型!");
+      throw new Error("请选择要导出的类型[Json/TypeScript/JavaScript]!");
     }
   }
   /**
@@ -333,7 +333,12 @@ export class Gen {
         continue;
       }
       if (lineData.length < title.length) {
-        throw new Error(`配置数据缺失:${itemSheet.name}:${itemSheet.sheet}:${line + 1}`);
+        const arr: string[] = [];
+        arr.push(`配置数据缺失:`);
+        arr.push(`excel: ${itemSheet.name}`);
+        arr.push(`sheet: ${itemSheet.sheet}`);
+        arr.push(`line:  ${line + 1}`);
+        throw new Error(arr.join("\n"));
       }
 
       const saveLineData = { server: {}, client: {} };
@@ -345,8 +350,22 @@ export class Gen {
         }
 
         let value = lineData[idx];
-        if (value === undefined) {
-          value = "";
+        // 单元格出现了空
+        if (value === null) {
+          if (Type.String === rule) {
+            // 如果对应的规则是字符串，就设置为空字符串
+            value = "";
+          } else {
+            const arr: string[] = [];
+            arr.push(`配置数据缺失:`);
+            arr.push(`excel: ${itemSheet.name}`);
+            arr.push(`sheet: ${itemSheet.sheet}`);
+            arr.push(`line:  ${line + 1}`);
+            arr.push(`column:${idx + 1}`);
+            arr.push(`key:   ${key}`);
+            arr.push(`rule:  ${rule}`);
+            throw new Error(arr.join("\n"));
+          }
         }
         if (value) {
           value = this.cutString(rule, value);

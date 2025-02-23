@@ -22,7 +22,7 @@ export class RuleCase {
     this.json = "";
   }
 }
-enum Type {
+export enum Type {
   None = "None",
   String = "String",
   Number = "Number",

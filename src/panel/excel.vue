@@ -28,7 +28,7 @@
 </template>
 <script lang="ts">
 import ccui from "@xuyanfeng/cc-ui";
-import CCP from "cc-plugin/src/ccp/entry-main";
+import CCP from "cc-plugin/src/ccp/entry-render";
 import chokidar from "chokidar";
 import { existsSync, readFileSync, readdirSync, statSync } from "fs";
 import nodeXlsx from "node-xlsx";
@@ -132,7 +132,7 @@ export default defineComponent({
       const sheetDuplicationChecker: Record<string, ItemData> = {};
       for (let path in data) {
         const bufferData = data[path];
-        const excelData = nodeXlsx.parse(bufferData);
+        const excelData = nodeXlsx.parse(bufferData, { defval: null });
         for (let i = 0; i < excelData.length; i++) {
           const excel = excelData[i];
           const itemData: ItemData = {

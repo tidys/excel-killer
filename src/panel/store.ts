@@ -9,7 +9,7 @@ export const appStore = defineStore("app", () => {
   return {
     config,
     init() {
-      profile.init(new ConfigData(), pluginConfig);
+      profile.init(new ConfigData(), pluginConfig, pluginConfig.manifest.name);
       const data = profile.load(`${pluginConfig.manifest.name}.json`) as ConfigData;
       config.value.excel_root_path = data.excel_root_path;
       config.value.exportClient = data.exportClient;
