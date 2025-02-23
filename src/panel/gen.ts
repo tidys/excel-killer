@@ -4,6 +4,7 @@ import jszip from "jszip";
 import { join } from "path";
 import { ConfigData, DirClientName, DirServerName, ItemData } from "./const";
 import { Rule, Type } from "./rule";
+import { genDtsString } from "./dts";
 export class Gen {
   private isMergeJson: boolean = false;
   private isFormatJson: boolean = false;
@@ -15,6 +16,7 @@ export class Gen {
   private isExportClient: boolean = false;
   private isExportJson: boolean = false;
   private isExportTs: boolean = false;
+  private isExportDts: boolean = false;
   private jsSavePath: string = "";
   private tsSavePath: string = "";
   private jsonSavePath: string = "";
@@ -40,6 +42,7 @@ export class Gen {
 
     this.isExportJson = cfg.exportJson;
     this.isExportJs = cfg.exportJs;
+    this.isExportDts = cfg.exportDts;
     this.isExportTs = cfg.exportTs;
 
     this.jsSavePath = cfg.js_save_path;
@@ -155,6 +158,9 @@ export class Gen {
     }
     this.exportJson(zip);
     this.exportJavaScript(zip);
+    if (this.isExportDts) {
+      this.saveDts(data, zip);
+    }
     this.exportTs(zip);
     if (CCP.Adaptation.Env.isWeb) {
       const content = await zip.generateAsync({ type: "blob" });
@@ -162,6 +168,16 @@ export class Gen {
       await CCP.Adaptation.Download.downloadBlobFile(filename, content);
     }
     return;
+  }
+  private saveDts(data: ItemData[], zip: null | jszip) {
+    const dtsArray: string[] = [];
+    for (let i = 0; i < data.length; i++) {
+      const item = data[i];
+      dtsArray.push(item.dts);
+    }
+    const dts = dtsArray.join("\n");
+    const path = join(this.tsSavePath, "excel.d.ts");
+    zip && zip.file(path, dts);
   }
   private exportTs(zip: null | jszip) {
     if (!this.isExportTs) {
@@ -319,6 +335,22 @@ export class Gen {
     }
     return true;
   }
+  private doDts(sheet: string, title: string[], desc: string[], rule: Type[]) {
+    const len = Math.min(title.length, desc.length);
+    const arr: Array<{ key: string; type: Type; desc: string }> = [];
+    for (let i = 0; i < len; i++) {
+      const keyItem = title[i];
+      const descItem = desc[i];
+      const ruleItem = rule[i];
+      arr.push({
+        key: keyItem,
+        type: ruleItem,
+        desc: descItem,
+      });
+    }
+    const ret = genDtsString(sheet, arr);
+    return ret;
+  }
   private splitData(itemSheet: ItemData): { server: any; client: any } {
     const excelData: any[][] = itemSheet.buffer;
     const title = excelData[0];
@@ -330,6 +362,7 @@ export class Gen {
     const target = excelData[2];
     this.checkTarget(itemSheet, target);
     const ruleText = excelData[3];
+    itemSheet.dts = this.doDts(itemSheet.sheet, title, desc, ruleText);
     const ret = { server: {}, client: {} };
     if (excelData.length >= 4) {
       const lineData = excelData[4];

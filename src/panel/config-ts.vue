@@ -3,6 +3,9 @@
     <CCProp name="导出" align="left">
       <CCCheckBox v-model:value="config.exportTs" @change="onSave"> </CCCheckBox>
     </CCProp>
+    <CCProp name="导出声明文件(.dts)" align="left">
+      <CCCheckBox v-model:value="config.exportDts" @change="onSave"> </CCCheckBox>
+    </CCProp>
     <CCProp name="TypeScript存放路径:" v-if="!isWeb">
       <CCInput v-model:value="config.ts_save_path" @click="onBtnClickOpenTsSavePath" :directory="true" disabled @change="onSave"></CCInput>
       <CCButton @confirm="onChooseTsSavePath"><i class="iconfont icon_folder"></i></CCButton>

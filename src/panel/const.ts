@@ -24,6 +24,7 @@ export interface ItemData {
    * excel的数据
    */
   buffer: any[][];
+  dts: string;
 }
 export class ConfigData {
   /**
@@ -70,6 +71,10 @@ export class ConfigData {
   ts_merge: boolean = false;
   ts_file_name: string = "GameTsCfg";
   exportTs: boolean = false;
+  /**
+   * 导出DTS声明文件
+   */
+  exportDts: boolean = false;
   /**
    * 导出JavaScript
    */

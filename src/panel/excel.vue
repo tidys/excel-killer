@@ -57,6 +57,7 @@ export default defineComponent({
         sheet: `sheet${i}`,
         isUse: true,
         buffer: null,
+        dts: "",
       });
     }
     /**
@@ -141,6 +142,7 @@ export default defineComponent({
             name: basename(path),
             sheet: excel.name,
             buffer: excel.data,
+            dts: "",
           };
           if (excel.data.length === 0) {
             console.log(`[Error] 空Sheet: ${itemData.name} - ${itemData.sheet}`);
