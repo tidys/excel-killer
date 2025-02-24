@@ -178,7 +178,7 @@ export class Gen {
       }
       if (forbidden.length > 0) {
         const data = new ccui.dialog.DialogUrlData();
-        data.label = `web版本仅不支持导出 ${forbidden.join("/")} ，请前往{cocos store下载插件}，谢谢支持！`;
+        data.label = `web版本不支持导出 ${forbidden.join("/")} ，请前往{cocos store下载插件}，谢谢支持！`;
         data.url = ccPluginConfig.manifest.store;
         data.jump = 5;
         const opts: DialogOptions = { data: data, title: "提示" };
