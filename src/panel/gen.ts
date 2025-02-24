@@ -5,6 +5,9 @@ import { join } from "path";
 import { ConfigData, DirClientName, DirServerName, ItemData } from "./const";
 import { checkType, Rule, Type } from "./rule";
 import { genDtsString } from "./dts";
+import ccui from "@xuyanfeng/cc-ui";
+import ccPluginConfig from "../../cc-plugin.config";
+import { DialogOptions } from "@xuyanfeng/cc-ui/types/cc-dialog/const";
 export class Gen {
   private isMergeJson: boolean = false;
   private isFormatJson: boolean = false;
@@ -151,24 +154,46 @@ export class Gen {
       }
       this.parseExcelData(itemSheet);
     }
-    console.log(this.jsonAllClientData);
     let zip: null | jszip = null;
     if (CCP.Adaptation.Env.isWeb) {
       zip = new jszip();
     }
     this.exportJson(zip);
-    this.exportJavaScript(zip);
-    if (this.isExportDts) {
-      this.saveDts(data, zip);
+    if (__VALID_CODE__) {
+      this.exportJavaScript(zip);
+      if (this.isExportDts) {
+        this.saveDts(data, zip);
+      }
+      this.exportTs(zip);
+    } else {
+      const forbidden = [];
+      if (this.isExportJs) {
+        forbidden.push("JavaScript");
+      }
+      if (this.isExportTs) {
+        forbidden.push("TypeScript");
+      }
+      if (this.isExportDts) {
+        forbidden.push("TypeScript.DTS");
+      }
+      if (forbidden.length > 0) {
+        const data = new ccui.dialog.DialogUrlData();
+        data.label = `web版本仅不支持导出 ${forbidden.join("/")} ，请前往{cocos store下载插件}，谢谢支持！`;
+        data.url = ccPluginConfig.manifest.store;
+        data.jump = 5;
+        const opts: DialogOptions = { data: data, title: "提示" };
+        ccui.dialog.showDialog(opts);
+      }
     }
-    this.exportTs(zip);
-    if (CCP.Adaptation.Env.isWeb) {
+    if (CCP.Adaptation.Env.isWeb && this.hasFileExport) {
       const content = await zip.generateAsync({ type: "blob" });
       const filename = "excel.zip";
       await CCP.Adaptation.Download.downloadBlobFile(filename, content);
     }
     return;
   }
+  /**是否有文件导出 */
+  private hasFileExport: boolean = false;
   private saveDts(data: ItemData[], zip: null | jszip) {
     const dtsArray: string[] = [];
     for (let i = 0; i < data.length; i++) {
@@ -178,6 +203,7 @@ export class Gen {
     const dts = dtsArray.join("\n");
     const path = join(this.tsSavePath, "excel.d.ts");
     zip && zip.file(path, dts);
+    this.hasFileExport = true;
   }
   private exportTs(zip: null | jszip) {
     if (!this.isExportTs) {
@@ -210,6 +236,7 @@ export class Gen {
     }
   }
   private saveTsFile(data: any, path: string, zip: null | jszip) {
+    this.hasFileExport = true;
     const str = "export default " + JSON.stringify(data, null, 2) + ";";
     ensureFileSync(path);
     writeFileSync(path, str);
@@ -433,6 +460,7 @@ export class Gen {
     writeFileSync(path, str);
     console.log("[Json]:" + path);
     zip && zip.file(path, str);
+    this.hasFileExport = true;
     return str;
   }
   saveJavaScriptFile(path: string, data: any, zip: null | jszip) {
@@ -441,6 +469,7 @@ export class Gen {
     writeFileSync(path, str);
     console.log("[JavaScript]" + path);
     zip && zip.file(path, str);
+    this.hasFileExport = true;
     return str;
   }
 

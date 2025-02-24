@@ -8,8 +8,8 @@
     <CCProp name="导出" tooltip="" align="left">
       <CCCheckBox v-model:value="config.exportJson" @change="onSave"> </CCCheckBox>
     </CCProp>
-    <CCProp name="合并所有Json" align="left" tooltip="[√]勾选,所有的配置将合并为一个json文件<br>[×]未勾选,每个sheet对应一个json文件">
-      <CCCheckBox v-model:value="config.json_merge" @change="onSave"></CCCheckBox>
+    <CCProp name="合并所有Json" align="left" tooltip="[√]勾选,所有的配置将合并为一个json文件<br>[×]未勾选,每个sheet对应一个json文件<br>web版本不支持该功能">
+      <CCCheckBox v-model:value="config.json_merge" :disabled="isWeb" @change="onSave"></CCCheckBox>
     </CCProp>
     <CCProp name="合并的Json配置文件名" v-show="config.json_merge">
       <CCInput v-model:value="config.json_all_cfg_file_name" placeholder="请输入json配置文件名" @change="onSave"></CCInput>
@@ -17,8 +17,8 @@
         <i class="iconfont icon_folder"></i>
       </CCButton>
     </CCProp>
-    <CCProp name="Json格式化" align="left" tooltip=" [√]勾选,json将格式化后保存<br>[×]未勾选,json将保存为单行文件">
-      <CCCheckBox v-model:value="config.json_format" @change="onSave"></CCCheckBox>
+    <CCProp name="Json格式化" align="left" tooltip=" [√]勾选,json将格式化后保存<br>[×]未勾选,json将保存为单行文件<br>web版本不支持该功能">
+      <CCCheckBox v-model:value="config.json_format" :disabled="isWeb" @change="onSave"></CCCheckBox>
     </CCProp>
     <CCProp name="Json存放路径:" v-if="!isWeb">
       <CCInput @click="onBtnClickOpenJsonSavePath" v-model:value="config.json_save_path" :disabled="true" :readonly="true" :directory="true"></CCInput>

@@ -9,6 +9,7 @@ const manifest: CocosPluginManifest = {
   description: "excel-killer",
   author: "cc-plugin",
   main: "./src/main.ts",
+  store: "https://store.cocos.com/app/detail/7022",
   analysis: {
     tongjiniao: "656939525843935232",
     googleAnalytics: {

@@ -68,7 +68,6 @@ export default defineComponent({
     async function onGen() {
       (async () => {
         const rawData = toRaw(excelArray.value);
-        console.log(rawData);
         const data = rawData.filter((item) => item.isUse);
         const gen = new Gen();
         try {
