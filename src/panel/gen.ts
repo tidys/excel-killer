@@ -203,6 +203,8 @@ export class Gen {
     const dts = dtsArray.join("\n");
     const path = join(this.tsSavePath, "excel.d.ts");
     zip && zip.file(path, dts);
+    ensureFileSync(path);
+    writeFileSync(path, dts);
     this.hasFileExport = true;
   }
   private exportTs(zip: null | jszip) {

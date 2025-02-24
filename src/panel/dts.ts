@@ -4,6 +4,7 @@ map[Type.String] = "String";
 map[Type.Number] = "Number";
 
 export function genDtsString(sheet: string, vars: Array<{ key: string; type: Type; desc: string }>) {
+  sheet = sheet.replace(/\-/g, "");
   const lines: string[] = [];
   lines.push(`export interface ${sheet} {`);
   for (let i = 0; i < vars.length; i++) {
