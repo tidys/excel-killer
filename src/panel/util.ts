@@ -1,5 +1,5 @@
 import ccui from "@xuyanfeng/cc-ui";
-import CCP from "cc-plugin/src/ccp/entry-main";
+import CCP from "cc-plugin/src/ccp/entry-render";
 import { existsSync } from "fs";
 import { join } from "path";
 import { toRaw } from "vue";

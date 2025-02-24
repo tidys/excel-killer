@@ -1,4 +1,4 @@
-// @ts-ignore
+import { GA_Github } from "cc-plugin/src/ccp/google-analytics";
 import { CocosPluginManifest, CocosPluginOptions, Panel, PluginType } from "cc-plugin/src/declare";
 
 const pkgName = "excel-killer-plus";
@@ -11,6 +11,10 @@ const manifest: CocosPluginManifest = {
   main: "./src/main.ts",
   analysis: {
     tongjiniao: "656939525843935232",
+    googleAnalytics: {
+      measurementID: GA_Github.measurementID,
+      apiSecret: GA_Github.apiSecret,
+    },
   },
   panels: [
     {

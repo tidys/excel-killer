@@ -7,7 +7,7 @@
 </template>
 <script lang="ts">
 import ccui from "@xuyanfeng/cc-ui";
-import CCP from "cc-plugin/src/ccp/entry-main";
+import CCP from "cc-plugin/src/ccp/entry-render";
 import { basename, extname } from "path";
 import { storeToRefs } from "pinia";
 import { config } from "process";

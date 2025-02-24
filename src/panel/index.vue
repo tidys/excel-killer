@@ -17,13 +17,13 @@
     </div>
     <CCDialog></CCDialog>
     <CCMenu></CCMenu>
-    <CCFootBar :version="version"></CCFootBar>
+    <CCFootBar :version="version" :hint-key="hintKey"></CCFootBar>
   </div>
 </template>
 
 <script lang="ts">
 import ccui from "@xuyanfeng/cc-ui";
-import CCP from "cc-plugin/src/ccp/entry-main";
+import CCP from "cc-plugin/src/ccp/entry-render";
 import chokidar from "chokidar";
 import { existsSync, mkdirSync } from "fs";
 import { join } from "path";
@@ -46,6 +46,7 @@ export default defineComponent({
   name: "index",
   components: { TestRule, TestExcel, CaseRule, ConfigSql, ConfigTs, Excel, CCButton, CCInput, CCProp, CCSection, CCDialog, CCMenu, CCFootBar, CCCheckBox, ExportConfig, ConfigJson, ConfigJs },
   setup() {
+    CCP.GoogleAnalytics.fire(`${PluginConfig.manifest.name}`, "open");
     appStore().init();
     onMounted(async () => {
       ccui.footbar.registerCmd({
@@ -79,10 +80,13 @@ export default defineComponent({
     });
     const version = ref(PluginConfig.manifest.version);
     const isWeb = ref(CCP.Adaptation.Env.isWeb);
+    const hintKey = ref(PluginConfig.manifest.name);
     return {
+      hintKey,
       isWeb,
       version,
       onBtnClickGen() {
+        CCP.GoogleAnalytics.fire(`${PluginConfig.manifest.name}`, "gen");
         emitter.emit(Msg.Gen);
       },
     };
