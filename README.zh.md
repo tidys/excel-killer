@@ -1,4 +1,7 @@
 # excel-killer-plus
+
+> 因为插件支持SQL转换的原因，暂时不支持creator 2.4.10以及更低版本。
+
 ## 插件说明:
 该插件使用[cc-plugin](https://www.npmjs.com/package/cc-plugin)开发，同时支持creator2.x， creator3.x、并且还支持[web在线使用](https://tidys.github.io/excel-killer/main.html)，插件完全
 [开源](https://github.com/tidys/excel-killer)，有需要前往[store下载](https://store.cocos.com/app/detail/2016)，插件的用户体验做的非常用心，希望能够成为你游戏开发道路上的必备工具。

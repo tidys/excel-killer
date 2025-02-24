@@ -6,7 +6,7 @@ const pkgName = "excel-killer-plus";
 const manifest: CocosPluginManifest = {
   name: pkgName,
   version: "0.6.4",
-  description: "excel-killer",
+  description: "excel-killer-plus",
   author: "cc-plugin",
   main: "./src/main.ts",
   store: "https://store.cocos.com/app/detail/7022",
