@@ -2050,10 +2050,10 @@ case-sensitive-paths-webpack-plugin@^2.3.0:
   resolved "https://registry.yarnpkg.com/case-sensitive-paths-webpack-plugin/-/case-sensitive-paths-webpack-plugin-2.4.0.tgz#db64066c6422eed2e08cc14b986ca43796dbc6d4"
   integrity sha512-roIFONhcxog0JSSWbvVAh3OocukmSgpqOH6YpMkCvav/ySIV3JKg4Dc8vYtQjYi/UxpNE36r/9v+VqTQqgkYmw==
 
-cc-plugin@2.2.3:
-  version "2.2.3"
-  resolved "https://mirrors.cloud.tencent.com/npm/cc-plugin/-/cc-plugin-2.2.3.tgz#340379ff50fe295527da5c3e2ab9b006dea62f5c"
-  integrity sha512-BZOdWwolyQUgdS59h0bEQnM6MK7RsMGFFNxDXeoZqKzRsV/A0i/s/jSCPiSOpGnVrzOGw4OY/uHwiGbuWyZzHw==
+cc-plugin@2.2.4:
+  version "2.2.4"
+  resolved "https://mirrors.cloud.tencent.com/npm/cc-plugin/-/cc-plugin-2.2.4.tgz#f6c70dd937b90209edf221f73a220fa0962b6fcb"
+  integrity sha512-53MwxWq32a3fSIDiplRx9jc/c1+t2eY4rsxQoWWKmO/f81GL6kWQalB8WzYBTqvc5YOGTZT55r9GI0bzKA5S+A==
   dependencies:
     "@babel/generator" "^7.16.8"
     "@popperjs/core" "^2.11.6"

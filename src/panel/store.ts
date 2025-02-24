@@ -9,6 +9,7 @@ export const appStore = defineStore("app", () => {
   return {
     config,
     init() {
+      // profile.forceEncrypt = true;
       profile.init(new ConfigData(), pluginConfig, pluginConfig.manifest.name);
       const data = profile.load(`${pluginConfig.manifest.name}.json`) as ConfigData;
       config.value.excel_root_path = data.excel_root_path;
