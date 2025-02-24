@@ -5,8 +5,8 @@
     "@types/chokidar": "^2.1.3",
     "@types/fs-extra": "9.0.1",
     "@types/node": "16.11.12",
-    "@xuyanfeng/cc-ui": "0.2.34",
-    "cc-plugin": "^2.1.66",
+    "@xuyanfeng/cc-ui": "0.2.38",
+    "cc-plugin": "2.2.3",
     "chokidar": "~2.0.2",
     "fs-extra": "^11.2.0",
     "jszip": "^3.10.1",
@@ -20,10 +20,11 @@
     "installForce": "yarn install --force",
     "ccp-pack-v2": "cc-plugin pack cp-v2",
     "ccp-pack-v3": "cc-plugin pack cp-v3",
-    "ccp-pack-web": "cc-plugin pack web",
+    "ccp-pack-web": "cc-plugin pack web --validCode=false",
     "ccp-serve-v2": "cc-plugin serve cp-v2",
     "ccp-serve-v3": "cc-plugin serve cp-v3",
-    "ccp-serve-web": "cc-plugin serve web"
+    "ccp-serve-web-full": "cc-plugin serve web --validCode=true",
+    "ccp-serve-web-lite": "cc-plugin serve web --validCode=false"
   },
   "version": "1.0.0"
 }
