@@ -333,7 +333,7 @@ export class Gen {
   private checkTarget(itemSheet: ItemData, target: Array<string | undefined>) {
     for (let i = 0; i < target.length; i++) {
       const key = target[i];
-      if (key === undefined) {
+      if (key === undefined || key === null) {
         throw new Error(`${itemSheet.name}/${itemSheet.sheet}数据异常：第3行${i + 1}列数据为空`);
       }
       if (key.indexOf("s") === -1 && key.indexOf("c") === -1) {
@@ -380,22 +380,52 @@ export class Gen {
     const ret = genDtsString(sheet, arr);
     return ret;
   }
+  /**找到第一个为null的数据就返回，后续的列全部都舍弃掉 */
+  private getTitleData(line: string[]): string[] {
+    const title: string[] = [];
+    for (let i = 0; i < line.length; i++) {
+      const item = line[i];
+      if (item === null) {
+        return title;
+      } else {
+        title.push(item);
+      }
+    }
+    return title;
+  }
+  private getLineData(itemSheet: ItemData, row: number, count: number): string[] {
+    const line: string[] = itemSheet.buffer[row];
+    const ret: string[] = [];
+    if (line.length < count) {
+      const arr: string[] = [];
+      arr.push(`第${row + 1}行数据少于${count}个`);
+      arr.push(`excel: ${itemSheet.name}`);
+      arr.push(`sheet: ${itemSheet.sheet}`);
+      throw new Error(arr.join("\n"));
+    }
+    for (let i = 0; i < count; i++) {
+      const item = line[i];
+      if (item === null) {
+        const arr: string[] = [];
+        arr.push(`第${row + 1}行，${i + 1}列，数据为空`);
+        arr.push(`excel: ${itemSheet.name}`);
+        arr.push(`sheet: ${itemSheet.sheet}`);
+        throw new Error(arr.join("\n"));
+      }
+      ret.push(item);
+    }
+    return ret;
+  }
   private splitData(itemSheet: ItemData): { server: any; client: any } {
     const excelData: any[][] = itemSheet.buffer;
-    const title = excelData[0];
+    const title: Array<string> = this.getTitleData(excelData[0]);
     this.checkTitle(itemSheet, title);
-    const desc = excelData[1];
-    /**
-     * 是客户端还是服务器
-     */
-    const target = excelData[2];
+    const desc = this.getLineData(itemSheet, 1, title.length);
+    const target = this.getLineData(itemSheet, 2, title.length);
     this.checkTarget(itemSheet, target);
-    const ruleText = excelData[3];
+    const ruleText = this.getLineData(itemSheet, 3, title.length);
     itemSheet.dts = this.doDts(itemSheet.sheet, title, desc, ruleText);
     const ret = { server: {}, client: {} };
-    if (excelData.length >= 4) {
-      const lineData = excelData[4];
-    }
     for (let line = 4; line < excelData.length; line++) {
       const lineData = excelData[line];
       if (this.isNullLine(lineData)) {
