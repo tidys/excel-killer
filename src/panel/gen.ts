@@ -471,7 +471,7 @@ export class Gen {
             throw new Error(arr.join("\n"));
           }
         }
-        if (value) {
+        if (value !== null) {
           value = this.cutString(rule, value);
         }
         if (this.isClientField(target[idx])) {
