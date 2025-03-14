@@ -42,6 +42,7 @@ export const appStore = defineStore("app", () => {
       config.value.exportTs = data.exportTs;
       config.value.exportDts = data.exportDts;
       config.value.expand_sql = data.expand_sql;
+      config.value.ts_prefix = data.ts_prefix || "excel_";
       if (CCP.Adaptation.Env.isWeb) {
         config.value.js_save_path = DirJsName;
         config.value.json_save_path = DirJsonName;

@@ -70,6 +70,13 @@ export class ConfigData {
   ts_save_path: string = "";
   ts_merge: boolean = false;
   ts_file_name: string = "GameTsCfg";
+  /**
+   * ts导出类型前缀
+   */
+  ts_prefix: string = "";
+  /**
+   * 导出TypeScript
+   */
   exportTs: boolean = false;
   /**
    * 导出DTS声明文件

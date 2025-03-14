@@ -3,10 +3,11 @@ const map = {};
 map[Type.String] = "String";
 map[Type.Number] = "Number";
 
-export function genDtsString(sheet: string, vars: Array<{ key: string; type: Type; desc: string }>) {
+export function genDtsString(prefix: string, sheet: string, vars: Array<{ key: string; type: Type; desc: string }>) {
+  prefix = prefix.replace(/\./g, "").replace(/\-/g, "");
   sheet = sheet.replace(/\-/g, "");
   const lines: string[] = [];
-  lines.push(`export interface ${sheet} {`);
+  lines.push(`export interface ${prefix.trim()}${sheet} {`);
   for (let i = 0; i < vars.length; i++) {
     const { desc, key, type } = vars[i];
     lines.push(`  /** ${desc}*/`);

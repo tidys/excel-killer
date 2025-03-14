@@ -20,6 +20,7 @@ export class Gen {
   private isExportJson: boolean = false;
   private isExportTs: boolean = false;
   private isExportDts: boolean = false;
+  private tsPrefix: string = "";
   private jsSavePath: string = "";
   private tsSavePath: string = "";
   private jsonSavePath: string = "";
@@ -47,6 +48,7 @@ export class Gen {
     this.isExportJs = cfg.exportJs;
     this.isExportDts = cfg.exportDts;
     this.isExportTs = cfg.exportTs;
+    this.tsPrefix = cfg.ts_prefix;
 
     this.jsSavePath = cfg.js_save_path;
     this.jsonSavePath = cfg.json_save_path;
@@ -377,7 +379,7 @@ export class Gen {
         desc: descItem,
       });
     }
-    const ret = genDtsString(sheet, arr);
+    const ret = genDtsString(this.tsPrefix, sheet, arr);
     return ret;
   }
   /**找到第一个为null的数据就返回，后续的列全部都舍弃掉 */

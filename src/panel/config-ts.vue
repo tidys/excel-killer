@@ -6,6 +6,9 @@
     <CCProp name="导出声明文件(.dts)" align="left">
       <CCCheckBox v-model:value="config.exportDts" @change="onSave"> </CCCheckBox>
     </CCProp>
+    <CCProp name="导出类型前缀" align="left" tooltip="dts声明类型的前缀<br>如前缀为excel_<br>表名为icon<br>最终类型就是excel_icon">
+      <CCInput v-model:value="config.ts_prefix" @change="onSave"></CCInput>
+    </CCProp>
     <CCProp name="TypeScript存放路径:" v-if="!isWeb">
       <CCInput v-model:value="config.ts_save_path" @click="onBtnClickOpenTsSavePath" :directory="true" disabled @change="onSave"></CCInput>
       <CCButton @confirm="onChooseTsSavePath"><i class="iconfont icon_folder"></i></CCButton>
