@@ -467,7 +467,7 @@ export class Gen {
             arr.push(`excel: ${itemSheet.name}`);
             arr.push(`sheet: ${itemSheet.sheet}`);
             arr.push(`line:  ${line + 1}`);
-            arr.push(`column:${idx + 1}`);
+            arr.push(`column:${idx + 1}|${this.columnLetter(idx + 1)}`);
             arr.push(`key:   ${key}`);
             arr.push(`rule:  ${rule}`);
             throw new Error(arr.join("\n"));
@@ -487,6 +487,10 @@ export class Gen {
       ret.client[id] = saveLineData.client;
     }
     return ret;
+  }
+  /**  1 -> A 以此类推*/
+  columnLetter(num: number) {
+    return String.fromCharCode(num + 64);
   }
   saveJsonFile(data: any, path: string, zip: null | jszip) {
     const str = JSON.stringify(data, null, this.isFormatJson ? 2 : 0);
