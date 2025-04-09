@@ -28,9 +28,11 @@ export enum Type {
   Number = "Number",
   Array = "Array",
   List = "List",
+  Bool = "Bool",
   Object = "Object",
 }
 export const testCases: RuleCase[] = [];
+testCases.push(new RuleCase("Array[Bool]", "0|1|2|-1", "布尔数组"));
 testCases.push(new RuleCase("Array[String]", "1|2|3", "字符串数组，元素类型相同，个数不确定"));
 testCases.push(new RuleCase("Array[Number]", "1|2|3", "数字数组，以|分割数据"));
 testCases.push(new RuleCase("Array[Array[Number]]", "10;20|100;200", `数组二级嵌套，分割符按照|;,的顺序依次进行分割`));
@@ -69,6 +71,8 @@ export function checkType(rule: string): Type {
   rule = rule.trim().toLowerCase();
   if (/^number$/g.test(rule)) {
     return Type.Number;
+  } else if (/^bool$/g.test(rule)) {
+    return Type.Bool;
   } else if (/^string$/g.test(rule)) {
     return Type.String;
   } else if (/^list\[.*\]$/g.test(rule)) {
@@ -123,6 +127,14 @@ export class Rule {
     text = text.toString().trim().replace(/\n|\r/g, "");
     const type = checkType(rule);
     switch (type) {
+      case Type.Bool: {
+        const n = Number(text);
+        if (Number.isNaN(n)) {
+          return !!text;
+        } else {
+          return !!n;
+        }
+      }
       case Type.String: {
         return text.toString();
       }
