@@ -43,6 +43,7 @@ const manifest: CocosPluginManifest = {
 // 这里的options变量名暂时不支持修改，发布时会进行必要的修改
 const options: CocosPluginOptions = {
   staticFileDirectory: "./static",
+  obscure: true,
   staticRequestRedirect: true,
   server: {
     enabled: true,
