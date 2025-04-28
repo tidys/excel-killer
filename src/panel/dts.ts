@@ -1,7 +1,7 @@
 import { Type } from "./rule";
 const map = {};
-map[Type.String] = "String";
-map[Type.Number] = "Number";
+map[Type.String] = "string";
+map[Type.Number] = "number";
 
 export function genDtsString(prefix: string, sheet: string, vars: Array<{ key: string; type: Type; desc: string }>) {
   prefix = prefix.replace(/\./g, "").replace(/\-/g, "");
